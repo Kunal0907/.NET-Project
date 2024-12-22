@@ -1,0 +1,278 @@
+﻿@model IEnumerable<CFirstApproach.Models.Employee>
+
+@{
+    ViewData["Title"] = "Enterprise Hub";
+}
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <div class="headline-container">
+            <div class="row">
+                <div class="col-3">
+                    <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiv8GJAKoppg7sCpg_4Udjw17KDixtKjXVpA&s" alt="CDAC" height="150" width="150"/>
+                </div>
+                <div class="col-9">
+                    <div class="headline-primary">
+                        <span class="tech-line">CDAC EMPLOYEES</span>
+                    </div>
+                    <div class="headline-accent">
+                        <span class="pulse-dot"></span>
+                        <span class="dynamic-text">Real-time Workforce Management</span>
+                    </div>
+                </div>
+            </div>
+
+
+            
+             
+        </div>
+
+        <div class="metrics-panel">
+            <div class="metric-card">
+                <i class="fas fa-users-cog pulse-icon"></i>
+                <div class="metric-content">
+                    <span class="metric-value">@Model.Count()</span>
+                    <span class="metric-label">Team Members</span>
+                </div>
+            </div>
+            <div class="metric-card">
+                <i class="fas fa-chart-line pulse-icon"></i>
+                <div class="metric-content">
+                    <span class="metric-value">Active</span>
+                    <span class="metric-label">System Status</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="control-panel">
+        <a asp-action="Create" class="command-button">
+            <i class="fas fa-plus-circle"></i>
+            <span>New Employee</span>
+        </a>
+    </div>
+
+    <div class="table-container">
+        <table class="modern-table">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-user"></i> @Html.DisplayNameFor(model => model.Name)</th>
+                    <th><i class="fas fa-venus-mars"></i> @Html.DisplayNameFor(model => model.Gender)</th>
+                    <th><i class="fas fa-birthday-cake"></i> @Html.DisplayNameFor(model => model.Age)</th>
+                    <th><i class="fas fa-city"></i> @Html.DisplayNameFor(model => model.City)</th>
+                    <th><i class="fas fa-cogs"></i> Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="hover-effect">
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Age)</td>
+                        <td>@Html.DisplayFor(modelItem => item.City)</td>
+                        <td class="action-buttons">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit">
+                                <i class="fas fa-edit">EDIT</i>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn-details">
+                                <i class="fas fa-info-circle">DETAILS</i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn-delete">
+                                <i class="fas fa-trash">DELETE</i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .dashboard-container {
+        background: #ffffff;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    .headline-container {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        padding: 2rem;
+        border-radius: 15px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .headline-primary {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .tech-line {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #2c5282;
+        text-shadow: 0 0 10px rgba(44,82,130,0.2);
+        letter-spacing: 0.5rem;
+    }
+
+    .power-line {
+        font-size: 2rem;
+        color: #2d3748;
+        font-weight: 600;
+        letter-spacing: 0.25rem;
+    }
+
+    .headline-accent {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .pulse-dot {
+        width: 10px;
+        height: 10px;
+        background: #48bb78;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #48bb78;
+    }
+
+    .dynamic-text {
+        color: #4a5568;
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+
+    .metrics-panel {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .metric-card {
+        background: #ffffff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border: 1px solid rgba(0,0,0,0.1);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .pulse-icon {
+        font-size: 2rem;
+        color: #2c5282;
+    }
+
+    .metric-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .metric-value {
+        color: #2d3748;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .metric-label {
+        color: #4a5568;
+        font-size: 0.9rem;
+    }
+
+    .control-panel {
+        margin: 2rem 0;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .command-button {
+        background: linear-gradient(135deg, #2c5282, #2b6cb0);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 30px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+
+        .command-button:hover {
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+    .modern-table {
+        width: 100%;
+        background: #ffffff;
+        border-radius: 15px;
+        overflow: hidden;
+        border-collapse: collapse;
+        margin-top: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+        .modern-table thead {
+            background: linear-gradient(135deg, #2c5282, #2b6cb0);
+        }
+
+        .modern-table th {
+            color: #ffffff;
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .modern-table td {
+            color: #4a5568;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+    .hover-effect:hover {
+        background: #f7fafc;
+        transform: scale(1.01);
+        transition: all 0.3s ease;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+        .action-buttons a {
+            padding: 0.5rem;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+    .btn-edit {
+        background: #2c5282;
+    }
+
+    .btn-details {
+        background: #d69e2e;
+    }
+
+    .btn-delete {
+        background: #c53030;
+    }
+
+    .action-buttons a:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+</style>
